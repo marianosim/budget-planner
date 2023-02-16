@@ -5,36 +5,39 @@ import { Remaining } from './components/Cards/Remaining';
 import { ExpenseTotal } from './components/Cards/ExpenseTotal';
 import { ExpenseList } from './components/ExpenseList/ExpenseList';
 import { AddExpenseForm } from './components/AddExpenseForm/AddExpenseForm';
+import { AppProvider } from './components/context/AppContext';
 
 
 const App = () => {
   return (
-    <div className='container'>
-      <h1 className='mt-3'>My Budget Planner</h1>
-      <div className='row mt-3'>
-        <div className='col-sm'>
-          <Budget />
-        </div>
-        <div className='col-sm'>
-          <Remaining />
-        </div>
-        <div className='col-sm'>
-          <ExpenseTotal />
-        </div>
-      </div>
-      <h3 className='mt-3'>Expenses</h3>
-      <div className='row-mt3'>
-        <div className='col-sm'>
-          <ExpenseList />
-        </div>
-        <h3 className='mt-3'>Add Expense:</h3>
-        <div className='mt-3'>
+    <AppProvider>
+      <div className='container'>
+        <h1 className='mt-3'>My Budget Planner</h1>
+        <div className='row mt-3'>
           <div className='col-sm'>
-            <AddExpenseForm />
+            <Budget />
+          </div>
+          <div className='col-sm'>
+            <Remaining />
+          </div>
+          <div className='col-sm'>
+            <ExpenseTotal />
+          </div>
+        </div>
+        <h3 className='mt-3'>Expenses</h3>
+        <div className='row-mt3'>
+          <div className='col-sm'>
+            <ExpenseList />
+          </div>
+          <h3 className='mt-3'>Add Expense:</h3>
+          <div className='mt-3'>
+            <div className='col-sm'>
+              <AddExpenseForm />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AppProvider>
   )
 }
 
