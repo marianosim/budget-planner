@@ -7,9 +7,10 @@ export const AddExpenseForm = () => {
 
     const { dispatch } = useContext(AppContext);
 
-    const { name, cost, onInputChange, onResetForm } = useForm({
+    const { name, cost, category, onInputChange, onResetForm } = useForm({
         name: '',
-        cost: ''
+        cost: '',
+        category: ''
     });
 
     const onFormSubmit = (e) => {
@@ -17,7 +18,9 @@ export const AddExpenseForm = () => {
         const expense = {
             id: uuidv4(),
             name,
-            cost: parseInt(cost)
+            cost: parseInt(cost),
+            date: new Date(),
+            category
         };
         dispatch({
             type: 'ADD_EXPENSE',
@@ -52,6 +55,24 @@ export const AddExpenseForm = () => {
                         value={cost}
                         onChange={onInputChange}
                     />
+                </div>
+                <div className="col-sm">
+                    <label htmlFor="category">Category:</label>
+                    <select
+                        class="form-select"
+                        name="category"
+                        value={category}
+                        onChange={onInputChange}
+                    >
+                        <option selected disabled>Open this select menu</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="bar & restaurants">Bar & Restaurants</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="services">Services</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="supermarket">Supermarket</option>
+                        <option value="miscellaneous">Miscellaneous</option>
+                    </select>
                 </div>
                 <div className='col-sm'>
                     <button className='btn btn-primary mt-3' type='submit'>
