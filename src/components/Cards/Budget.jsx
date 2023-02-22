@@ -27,7 +27,7 @@ export const Budget = () => {
       {
         edit ||
         <div className="d-flex justify-content-between">
-          <span>Budget: ${budget}</span>
+          <span><strong>Budget:</strong> ${budget}</span>
           <button
             className="btn btn-primary"
             onClick={() => setEdit(true)}

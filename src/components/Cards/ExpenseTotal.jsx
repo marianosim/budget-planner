@@ -8,7 +8,7 @@ export const ExpenseTotal = () => {
 
     return (
         <div className={`alert alert-${totalExpenses() >= budget ? 'danger' : 'primary'}`}>
-            <span>Spent so far: ${totalExpenses()}</span>
+            <span><strong>Spent so far:</strong> ${totalExpenses()}</span>
         </div>
     )
 }

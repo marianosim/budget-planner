@@ -4,9 +4,10 @@ import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
 
 export const ExpenseItem = (expense) => {
-    const { name, cost, id } = expense;
-    
+    const { name, cost, id, date, category } = expense;
+
     const { dispatch } = useContext(AppContext);
+
 
     const handleDeleteExpense = () => {
         dispatch({
@@ -14,10 +15,16 @@ export const ExpenseItem = (expense) => {
             payload: id
         });
     }
-    
+
     return (
         <li className='list-group-item d-flex justify-content-between align-items-center'>
             {name}
+            <div>
+                {date.toISOString().slice(0, 10)}
+            </div>
+            <div>
+                {category}
+            </div>
             <div>
                 <Badge pill bg='primary' className='mr-3'>
                     ${cost}

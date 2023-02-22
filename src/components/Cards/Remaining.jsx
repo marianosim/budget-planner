@@ -8,7 +8,7 @@ export const Remaining = () => {
 
     return (
         <div className={`alert alert-${remainingBudget() <= 0 ? 'danger' : 'success'}`}>
-            <span>Remaining: ${remainingBudget()}</span>
+            <span><strong>Remaining:</strong> ${remainingBudget()}</span>
         </div>
     )
 }

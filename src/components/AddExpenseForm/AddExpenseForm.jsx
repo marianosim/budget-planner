@@ -64,7 +64,7 @@ export const AddExpenseForm = () => {
                         value={category}
                         onChange={onInputChange}
                     >
-                        <option selected disabled>Open this select menu</option>
+                        <option disabled>Open this select menu</option>
                         <option value="shopping">Shopping</option>
                         <option value="bar & restaurants">Bar & Restaurants</option>
                         <option value="transportation">Transportation</option>
