@@ -7,8 +7,8 @@ export const Remaining = () => {
     const { remainingBudget } = useContext(AppContext);
 
     return (
-        <div className={`alert alert-${remainingBudget() <= 0 ? 'danger' : 'success'}`}>
-            <span><strong>Remaining:</strong> ${remainingBudget()}</span>
+        <div className={`alert alert-${remainingBudget() <= 0 ? 'danger' : 'success'} text-center`}>
+            <span className="fw-bold">Remaining: ${remainingBudget()}</span>
         </div>
     )
 }

@@ -1,36 +1,38 @@
 import React, { useContext } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import { TiDelete } from 'react-icons/ti';
+import { deleteExpense } from '../../services/firestore';
 import { AppContext } from '../context/AppContext';
 
-export const ExpenseItem = (expense) => {
+export const ExpenseItem = ({ expense }) => {
     const { name, cost, id, date, category } = expense;
 
     const { dispatch } = useContext(AppContext);
 
 
-    const handleDeleteExpense = () => {
-        dispatch({
-            type: 'REMOVE_EXPENSE',
-            payload: id
-        });
+    const handleDelete = () => {
+        deleteExpense(id)
+            .then(() => {
+                dispatch({
+                    type: 'REMOVE_EXPENSE',
+                    payload: id
+                })
+            })
     }
 
     return (
-        <li className='list-group-item d-flex justify-content-between align-items-center'>
-            {name}
-            <div>
-                {date.toISOString().slice(0, 10)}
-            </div>
-            <div>
-                {category}
-            </div>
-            <div>
-                <Badge pill bg='primary' className='mr-3'>
-                    ${cost}
-                </Badge>
-                <TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete>
-            </div>
-        </li >
+        <>
+            <tr>
+                <td>{name}</td>
+                <td>{date}</td>
+                <td>{category}</td>
+                <td>
+                    <Badge pill bg='primary' className='mr-3'>
+                        ${cost}
+                    </Badge>
+                    <TiDelete size='1.5em' onClick={handleDelete}></TiDelete>
+                </td>
+            </tr>
+        </>
     )
 };

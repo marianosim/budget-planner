@@ -7,7 +7,7 @@ export const ExpenseTotal = () => {
     const { totalExpenses, budget } = useContext(AppContext);
 
     return (
-        <div className={`alert alert-${totalExpenses() >= budget ? 'danger' : 'primary'}`}>
+        <div className={`alert alert-${totalExpenses() >= budget ? 'danger' : 'primary'} text-center`}>
             <span><strong>Spent so far:</strong> ${totalExpenses()}</span>
         </div>
     )

@@ -1,7 +1,12 @@
 import { createContext, useReducer } from "react";
 
 const AppReducer = (state, action) => {
-    switch(action.type){
+    switch (action.type) {
+        case 'FETCH_DATA':
+            return {
+                ...state,
+                expenses: action.payload
+            }
         case 'ADD_EXPENSE':
             return {
                 ...state,
@@ -15,26 +20,24 @@ const AppReducer = (state, action) => {
         case 'EDIT_BUDGET':
             return {
                 ...state,
-                budget:  action.payload
+                budget: action.payload
             }
         default:
             return state;
     }
 }
 
+
+
 const initialState = {
     budget: 2000,
-    expenses: [
-        // {id:1, name: 'shopping', cost: 40},
-        // {id:2, name: 'holiday', cost: 300},
-        // {id:3, name: 'Car service', cost: 50}
-    ],
+    expenses: [],
 
 };
 
 export const AppContext = createContext();
 
-export const AppProvider = ({children}) => {
+export const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     const totalExpenses = () => {
@@ -46,7 +49,8 @@ export const AppProvider = ({children}) => {
     }
 
 
-    return(<AppContext.Provider value={{
+    return (<AppContext.Provider value={{
+        state,
         budget: state.budget,
         expenses: state.expenses,
         dispatch,

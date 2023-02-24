@@ -26,10 +26,10 @@ export const Budget = () => {
     <div className="alert alert-secondary">
       {
         edit ||
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-around">
           <span><strong>Budget:</strong> ${budget}</span>
           <button
-            className="btn btn-primary"
+            className="btn btn-outline-primary btn-sm"
             onClick={() => setEdit(true)}
           >
             Edit

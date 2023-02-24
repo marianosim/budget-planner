@@ -1,31 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { getExpenses } from "../../services/firestore";
 import { AppContext } from "../context/AppContext";
 import { ExpenseItem } from "../ExpenseItem/ExpenseItem";
 
 
 export const ExpenseList = () => {
-    const { expenses } = useContext(AppContext);
+    const { expenses, dispatch } = useContext(AppContext);
+
+    useEffect(() => {
+        getExpenses()
+            .then(data => {
+                dispatch({
+                    type: 'FETCH_DATA',
+                    payload: data
+                })
+            })
+    }, [dispatch])
+
     return (
         <>
-            <h4 className="d-flex justify-content-between align-items-center ms-3 me-3">
-                <p>
-                    Name
-                </p>
-                <p>
-                    Date
-                </p>
-                <p>
-                    Category
-                </p>
-                <p>
-                    Cost
-                </p>
-            </h4>
-            <ul className="list-group">
-                {expenses.map((expense) => (
-                    <ExpenseItem {...expense} key={expense.id} />
-                ))}
-            </ul>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        expenses.map((expense, i) => {
+                            return <ExpenseItem expense={expense} key={i} />
+                        })
+                    }
+                </tbody>
+            </table>
         </>
     )
 }
