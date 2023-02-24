@@ -6,17 +6,13 @@ import {
     getDocs,
     doc,
     getDoc,
-    query,
-    where,
     addDoc,
-    updateDoc,
     deleteDoc
 } from 'firebase/firestore';
 
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyABcAJWsm7JxDOsqxpa75yqYACphU4kdKI",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "budgetplanner-d9747.firebaseapp.com",
     projectId: "budgetplanner-d9747",
     storageBucket: "budgetplanner-d9747.appspot.com",
@@ -52,34 +48,28 @@ export const addExpense = async (expenseData) => {
         const docRef = doc(firestore, 'expenses', docToAdd.id)
         const newDoc = await getDoc(docRef);
         return newDoc.data()
-        
+
     } catch (error) {
         console.log(error)
     }
-
 }
 
 export const getSingleExpense = async (id) => {
     try {
         const docRef = doc(firestore, 'expenses', id);
         const docSnapShot = await getDoc(docRef);
-        return {...docSnapShot.data(), id: docSnapShot.id}
+        return { ...docSnapShot.data(), id: docSnapShot.id }
     } catch (error) {
         console.log(error)
     }
 }
 
-// export const removeExpense = async (id) => {
-//     const docRef = doc(firestore, 'expenses', id);
-//    const updatedDoc = await updateDoc(docRef, {
-//         type: 'removed'
-//     })
-//     const getUpdatedDoc = await getDoc(docRef)
-//     return getUpdatedDoc.data()
-// }
-
 export const deleteExpense = async (id) => {
-    await deleteDoc(doc(firestore, 'expenses', id))
+    try {
+        await deleteDoc(doc(firestore, 'expenses', id))
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
